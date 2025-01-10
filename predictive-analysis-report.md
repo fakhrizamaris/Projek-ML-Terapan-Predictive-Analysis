@@ -55,9 +55,8 @@ Dataset yang digunakan berisi informasi historis harga saham BMW dengan 1.258 ba
 
 Analisis statistik awal menunjukkan:
 
-- Rentang harga saham (_Close_) dari €56,70 hingga €102,45
-- Rata-rata harga penutupan adalah €82,94
-- Volume perdagangan menunjukkan variabilitas yang tinggi, berkisar antara 993.600 hingga 12.307.900 lembar saham
+- Rentang harga saham (_Close_) dari €17.04 hingga €122.59
+- Rata-rata harga _Close_ adalah €56.42
 
 #### Analisis Tren Data
 
@@ -70,6 +69,7 @@ Visualisasi tren harga penutupan menunjukkan:
 #### Analisis Korelasi
 
 Matriks korelasi mengungkapkan hubungan penting:
+![Visualisasi Menggunakan Matriks Korelasi]()
 
 1. Korelasi positif yang kuat (>0,99) antara:
    - Harga Close dan Open (0,99)
@@ -147,9 +147,16 @@ Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
   - Bekerja baik untuk hubungan linear
 - Keterbatasan:
   - Mengasumsikan hubungan linear
-  - Sensitif terhadap pencilan
 
 ## Evaluation
+
+### Perbandingan Model dengan matriks MSE
+| Model           | Train Error | Test Error |
+|------------------|-------------|------------|
+| KNN             | 0.095       | 0.116      |
+| Random Forest   | 0.002       | 0.024      |
+| Linear Regression | 0.095     | 0.116      |
+
 
 ### Analisis Hasil
 

@@ -23,18 +23,20 @@ bmw_data
 
 """# EDA (EKSPLORATORY DATA ANALYSIS)
 Disini saya melihat informasi data mulai dari tipe data masing - masing kolom dan juga jumlah column yang ada.
+
+## Informasi Data
 """
 
+# Melihat informasi data
 bmw_data.info()
 
+# Melihat statistik deskriptif data
 bmw_data.describe()
 
+# Mengecek apakah ada nilai yang null dalam data
 bmw_data.isnull().sum()
 
-"""# PREPROCESSING DATA
-
-Setelah saya melihat informasi dari dataset tersebut, diketahui tidak ada nilai kosong/null dalam dataset tersebut. sehingga kita akan melanjutkan preprocessing data untuk melihat tren dataset.
-"""
+"""## Analisis Tren Harga Saham"""
 
 # Mengubah kolom Date menjadi datetime agar dapat melihat tren dari data
 bmw_data['Date'] = pd.to_datetime(bmw_data['Date'])
@@ -57,28 +59,32 @@ plt.show()
 Disini saya ingin melihat korelasi antar kolom yang dapat memepengaruhi harga saham BMW
 """
 
-# Correlation matrix
+# Melihat Korelasi menggunakan matriks korelasi
 correlation_matrix = bmw_data.corr().round(2)
 
-# Plot heatmap
 plt.figure(figsize=(10, 8))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5,)
 plt.title('Correlation Matrix')
 plt.show()
 
-# Pairplot for selected features
+# Melihat korelasi dengan pairplot
 selected_features = ['Close', 'High', 'Low', 'Open', 'Volume']
 sns.pairplot(bmw_data[selected_features])
 plt.show()
 
-"""### Hasil Analisis Korelasi
+"""# PREPROCESSING DATA
+
+Setelah saya melihat informasi dari dataset tersebut, diketahui tidak ada nilai kosong/null dalam dataset tersebut. sehingga kita akan melanjutkan preprocessing data untuk melihat tren dataset.
+
+## Feature Selection
 Dapat dilihat diatas bahwa kolom close, open, low, dan high berkorelasi sangat kuat, sedangkan volume memiliki performa korelasi yang negative terhadapat harga lainnya. Selanjutnya saya ingin memilih kolom "Close" sebagai target prediksi.
 """
 
+# Menghapus kolom Volume
 bmw_data.drop(['Volume'], inplace=True, axis=1)
 bmw_data.head()
 
-"""# TRAIN TEST SPLIT"""
+"""## TRAIN TEST SPLIT"""
 
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.linear_model import LinearRegression
@@ -95,7 +101,7 @@ print(f'Total # of sample in whole dataset: {len(X)}')
 print(f'Total # of sample in train dataset: {len(X_train)}')
 print(f'Total # of sample in test dataset: {len(X_test)}')
 
-"""# STANDARISASI"""
+"""## STANDARDISASI"""
 
 from sklearn.preprocessing import StandardScaler
 
@@ -105,19 +111,18 @@ scaler.fit(X_train[numerical_features])
 X_train[numerical_features] = scaler.transform(X_train.loc[:, numerical_features])
 X_train[numerical_features].head()
 
+"""# MODELLING"""
+
 # Siapkan dataframe untuk analisis model
 models = pd.DataFrame(index=['train_mse', 'test_mse'],
                       columns=['KNN', 'RandomForest', 'LinearRegression'])
 
-"""# MODELLING
-
-## KNN (K-Nearest Neighbors)
-"""
+"""## KNN (K-Nearest Neighbors)"""
 
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_squared_error
 
-knn = KNeighborsRegressor(n_neighbors=9)
+knn = KNeighborsRegressor(n_neighbors=12)
 knn.fit(X_train, y_train)
 
 models.loc['train_mse','knn'] = mean_squared_error(y_pred = knn.predict(X_train), y_true=y_train)
@@ -128,7 +133,7 @@ models.loc['train_mse','knn'] = mean_squared_error(y_pred = knn.predict(X_train)
 from sklearn.ensemble import RandomForestRegressor
 
 # buat model prediksi
-RF = RandomForestRegressor(n_estimators=50, max_depth=16, random_state=45, n_jobs=-1)
+RF = RandomForestRegressor(n_estimators=45, max_depth=32, random_state=321, n_jobs=-1)
 RF.fit(X_train, y_train)
 
 models.loc['train_mse','RandomForest'] = mean_squared_error(y_pred=RF.predict(X_train), y_true=y_train)
@@ -171,3 +176,19 @@ for name, model in model_dict.items():
     pred_dict['prediksi_'+name] = model.predict(prediksi).round(1)
 
 pd.DataFrame(pred_dict)
+
+"""## Memilih model untuk visualisasi prediksi harga
+Disini saya memilih model yang digunakan berdasarkan hasil matriks MSE yang ada bahwa model LR merupakan model dengan performa MSE yang paling rendah sehingga saya menggunakannya untuk prediksi. Garis merah putus - putus merupakan penanda bahwa prediksi harga dan harga aktual sempurna atau sama.
+"""
+
+# Visualisasi prediksi vs aktual untuk model terbaik (Random Forest)
+plt.figure(figsize=(12, 6))
+y_pred_rf = LR.predict(X_test)
+plt.scatter(y_test, y_pred_rf, alpha=0.5)
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
+plt.xlabel('Harga Aktual')
+plt.ylabel('Harga Prediksi')
+plt.title('Random Forest: Prediksi vs Aktual')
+plt.tight_layout()
+plt.legend()
+plt.show()

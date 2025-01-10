@@ -35,7 +35,7 @@ Pada riset jurnal yang berjudul _"Stock Market Prediction with Historical Time S
 
 ## Data Understanding
 
-Dataset yang digunakan adalah data historis saham BMW dari Kaggle [[2]](https://www.kaggle.com/datasets/mhassansaboor/bmw-stock-data-1996-2024) `yang mencakup informasi harga harian dan volume perdagangan BWM dari tahun 1996-2024.
+Dataset yang digunakan adalah data historis saham BMW dari Kaggle [[2]](https://www.kaggle.com/datasets/mhassansaboor/bmw-stock-data-1996-2024) yang mencakup informasi harga harian dan volume perdagangan BWM dari tahun 1996-2024.
 
 ### Variabel-variabel pada dataset:
 
@@ -61,6 +61,7 @@ Analisis statistik awal menunjukkan:
 #### Analisis Tren Data
 
 Visualisasi tren harga penutupan menunjukkan:
+![](https://github.com/fakhrizamaris/Projek-ML-Terapan-Predictive-Analysis/blob/main/assets/tren-data.png)
 
 - Tren kenaikan secara keseluruhan dalam harga saham BMW selama periode tersebut
 - Beberapa fluktuasi harga yang signifikan, dengan penurunan tajam yang diikuti pemulihan
@@ -69,7 +70,7 @@ Visualisasi tren harga penutupan menunjukkan:
 #### Analisis Korelasi
 
 Matriks korelasi mengungkapkan hubungan penting:
-![Visualisasi Menggunakan Matriks Korelasi]()
+![Visualisasi Menggunakan Matriks Korelasi](https://github.com/fakhrizamaris/Projek-ML-Terapan-Predictive-Analysis/blob/main/assets/matriks-korelasi.png)
 
 1. Korelasi positif yang kuat (>0,99) antara:
    - Harga Close dan Open (0,99)
@@ -80,6 +81,7 @@ Matriks korelasi mengungkapkan hubungan penting:
    - Hal ini menunjukkan volume perdagangan yang lebih tinggi mungkin sedikit berkorelasi dengan penurunan harga
 
 Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
+![](https://github.com/fakhrizamaris/Projek-ML-Terapan-Predictive-Analysis/blob/main/assets/korelasi-pairplot.png)
 
 - Hubungan linear antara semua fitur terkait harga
 - Hubungan non-linear yang tersebar antara Volume dan fitur lainnya

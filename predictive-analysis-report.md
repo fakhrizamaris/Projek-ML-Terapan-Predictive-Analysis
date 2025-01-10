@@ -6,7 +6,7 @@ Analisis prediktif harga saham merupakan aspek krusial dalam industri keuangan d
 
 Dalam era digital saat ini, penggunaan machine learning untuk memprediksi harga saham telah menjadi pendekatan yang semakin populer karena kemampuannya dalam mengidentifikasi pola dan tren dari data historis.
 
-Pada riset jurnal yang berjudul _"Stock Market Prediction with Historical Time Series Data and Sentimental Analysis of Social Media Data_"[2](https://ieeexplore.ieee.org/document/9121121) menunjukkan bahwa meskipun pasar saham cenderung efisien, masih terdapat pola-pola yang dapat diprediksi menggunakan teknik machine learning.
+Pada riset jurnal yang berjudul _"Stock Market Prediction with Historical Time Series Data and Sentimental Analysis of Social Media Data_" [[1]](https://ieeexplore.ieee.org/document/9121121) menunjukkan bahwa meskipun pasar saham cenderung efisien, masih terdapat pola-pola yang dapat diprediksi menggunakan teknik machine learning.
 
 ## Business Understanding
 
@@ -29,13 +29,13 @@ Pada riset jurnal yang berjudul _"Stock Market Prediction with Historical Time S
    - _Random Forest_
    - _Linear Regression_
 2. Melakukan optimasi model dengan:
-   - Feature scaling menggunakan _StandardScaler_
-   - Hyperparameter tuning untuk model _Random Forest_
+   - _Feature scaling_ menggunakan _StandardScaler_
+   - _Hyperparameter_ tuning untuk model _Random Forest_
 3. Menggunakan metrics MSE (_Mean Squared Error_) untuk evaluasi model
 
 ## Data Understanding
 
-Dataset yang digunakan adalah data historis saham BMW dari Kaggle[2](https://www.kaggle.com/datasets/mhassansaboor/bmw-stock-data-1996-2024) `yang mencakup informasi harga harian dan volume perdagangan BWM dari tahun 1996-2024.
+Dataset yang digunakan adalah data historis saham BMW dari Kaggle [[2]](https://www.kaggle.com/datasets/mhassansaboor/bmw-stock-data-1996-2024) `yang mencakup informasi harga harian dan volume perdagangan BWM dari tahun 1996-2024.
 
 ### Variabel-variabel pada dataset:
 

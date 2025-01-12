@@ -35,21 +35,46 @@ Pada riset jurnal yang berjudul _"Stock Market Prediction with Historical Time S
 
 ## Data Understanding
 
-Dataset yang digunakan adalah data historis saham BMW dari Kaggle [[2]](https://www.kaggle.com/datasets/mhassansaboor/bmw-stock-data-1996-2024) yang mencakup informasi harga harian dan volume perdagangan BWM dari tahun 1996-2024.
+### Kondisi Data
+
+1. _Missing Value_: Tidak ditemukan nilai yang hilang _(missing value_) pada dataset. Hal ini menunjukkan data lengkap untuk seluruh fitur.
+2. Duplikasi Data: Tidak terdapat duplikat data setelah dilakukan pemeriksaan menggunakan metode _.duplicated()_.
+3. _Outlier_: Pada fitur harga _(Close, Open, High, Low_), tidak ditemukan outlier ekstrem berdasarkan analisis visual menggunakan boxplot.
+Namun, pada fitur Volume, terdapat beberapa nilai yang jauh lebih besar dibandingkan nilai rata-rata. Hal ini diantisipasi sebagai variasi normal karena volume perdagangan dapat berfluktuasi signifikan berdasarkan aktivitas pasar.
+
+### Tautan Sumber Data
+Dataset yang digunakan berasal dari Kaggle dan dapat diakses melalui tautan berikut:
+_BMW Stock Data 1996-2024_ [[2]](https://www.kaggle.com/datasets/mhassansaboor/bmw-stock-data-1996-2024).
+
 
 ### Variabel-variabel pada dataset:
 
 Dataset yang digunakan berisi informasi historis harga saham BMW dengan 7212 baris data dan 7 fitur. Berikut rincian fitur-fiturnya:
 
-1. Date: Tanggal perdagangan (digunakan sebagai index)
-2. Open: Harga pembukaan saham
-3. High: Harga tertinggi selama hari perdagangan
-4. Low: Harga terendah selama hari perdagangan
-5. Close: Harga penutupan saham
-6. Adj Close: Harga penutupan yang disesuaikan
-7. Volume: Jumlah lembar saham yang diperdagangkan
+1. Date:
+   - Tipe Data: object
+   - Deskripsi: Tanggal perdagangan saham. Digunakan sebagai indeks dalam analisis data.
+2. Open:
+   - Tipe Data: Float
+   - Deskripsi: Harga pembukaan saham pada hari perdagangan.
+3. High:
+   - Tipe Data: Float
+   - Deskripsi: Harga tertinggi saham selama hari perdagangan.
+4. Low:
+   - Tipe Data: Float
+   - Deskripsi: Harga terendah saham selama hari perdagangan.
+5. Close:
+   - Tipe Data: Float
+   - Deskripsi: Harga penutupan saham pada akhir hari perdagangan.
+   - Catatan: Fitur ini digunakan sebagai target (dependent variable) untuk model prediksi.
+6. Adj Close:
+   - Tipe Data: Float
+   - Deskripsi: Harga penutupan yang disesuaikan, mencerminkan dividen atau aksi korporasi.
+7. Volume:
+   - Tipe Data: Integer
+   - Deskripsi: Jumlah total lembar saham yang diperdagangkan selama hari perdagangan.
 
-### Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (EDA)
 
 #### Ringkasan Statistik
 
@@ -166,20 +191,27 @@ Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
 
 1. Evaluasi Keberhasilan Proyek:
 
-   - Proyek berhasil membangun tiga model prediktif
-   - Random Forest menunjukkan kinerja terbaik dengan MSE terendah rata-rata dari data train dan test
-   - Semua model menunjukkan kemampuan prediksi yang wajar untuk harga saham BMW
+   - Proyek berhasil membangun tiga model prediktif.
+   - Random Forest menunjukkan kinerja terbaik dengan MSE terendah rata-rata dari data train dan test.
+   - Semua model menunjukkan kemampuan prediksi yang wajar untuk harga saham BMW.
 
 2. Pencapaian Tujuan:
 
-   - Tujuan utama prediksi harga tercapai
-   - Model Random Forest menunjukkan performa sangat baik dengan MSE test
-   - Model mempertahankan kinerja baik pada data yang belum pernah dilihat
+   - Tujuan utama prediksi harga tercapai.
+   - Model Random Forest menunjukkan performa sangat baik dengan MSE test.
+   - Model mempertahankan kinerja baik pada data yang belum pernah dilihat.
 
 3. Penyelesaian Masalah:
-   - Berhasil menciptakan model prediksi harga saham yang andal
-   - Random Forest memberikan keseimbangan terbaik antara akurasi dan generalisasi
-   - Model dapat digunakan untuk prediksi harga jangka pendek dengan tingkat kepercayaan yang wajar
+   - Berhasil menciptakan model prediksi harga saham yang andal.
+   - Random Forest memberikan keseimbangan terbaik antara akurasi dan generalisasi.
+   - Model dapat digunakan untuk prediksi harga jangka pendek dengan tingkat kepercayaan yang wajar.
+   
+4. Identifikasi Fitur Berpengaruh: Analisis dan pemilihan fitur menunjukkan bahwa beberapa variabel memainkan peran penting dalam memprediksi pergerakan harga saham:
+   - Open: Harga pembukaan memiliki korelasi yang sangat kuat dengan harga penutupan (Close). Ini menunjukkan pola pergerakan yang konsisten dalam satu hari perdagangan.
+   - High dan Low: Harga tertinggi dan terendah selama hari perdagangan memberikan informasi tentang volatilitas pasar yang memengaruhi harga penutupan.
+   - Adj Close: Harga penutupan yang disesuaikan mempertimbangkan dividen dan aksi korporasi lainnya, sehingga menjadi indikator yang lebih akurat terhadap nilai aktual saham.
+   - Volume: Walaupun memiliki korelasi yang lebih rendah dibandingkan fitur lain, volume perdagangan mencerminkan aktivitas pasar dan minat investor terhadap saham tertentu.
+
 
 ### Rekomendasi
 

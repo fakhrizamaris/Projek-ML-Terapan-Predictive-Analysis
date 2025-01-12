@@ -39,7 +39,7 @@ Dataset yang digunakan adalah data historis saham BMW dari Kaggle [[2]](https://
 
 ### Variabel-variabel pada dataset:
 
-Dataset yang digunakan berisi informasi historis harga saham BMW dengan 1.258 baris data dan 7 fitur. Berikut rincian fitur-fiturnya:
+Dataset yang digunakan berisi informasi historis harga saham BMW dengan 7212 baris data dan 7 fitur. Berikut rincian fitur-fiturnya:
 
 1. Date: Tanggal perdagangan (digunakan sebagai index)
 2. Open: Harga pembukaan saham
@@ -61,7 +61,7 @@ Analisis statistik awal menunjukkan:
 #### Analisis Tren Data
 
 Visualisasi tren harga penutupan menunjukkan:
-![](https://github.com/fakhrizamaris/Projek-ML-Terapan-Predictive-Analysis/blob/main/assets/tren-data.png)
+![tren-data](https://github.com/user-attachments/assets/b9c2ac05-e16f-46b0-b1cd-41a4c9ac6ebb)
 
 - Tren kenaikan secara keseluruhan dalam harga saham BMW selama periode tersebut
 - Beberapa fluktuasi harga yang signifikan, dengan penurunan tajam yang diikuti pemulihan
@@ -70,7 +70,7 @@ Visualisasi tren harga penutupan menunjukkan:
 #### Analisis Korelasi
 
 Matriks korelasi mengungkapkan hubungan penting:
-![Visualisasi Menggunakan Matriks Korelasi](https://github.com/fakhrizamaris/Projek-ML-Terapan-Predictive-Analysis/blob/main/assets/matriks-korelasi.png)
+![matriks-korelasi](https://github.com/user-attachments/assets/531ed4f7-1dde-4090-9cb9-6c47f7d2d4c6)
 
 1. Korelasi positif yang kuat (>0,99) antara:
    - Harga Close dan Open (0,99)
@@ -81,7 +81,8 @@ Matriks korelasi mengungkapkan hubungan penting:
    - Hal ini menunjukkan volume perdagangan yang lebih tinggi mungkin sedikit berkorelasi dengan penurunan harga
 
 Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
-![](https://github.com/fakhrizamaris/Projek-ML-Terapan-Predictive-Analysis/blob/main/assets/korelasi-pairplot.png)
+![korelasi-pairplot](https://github.com/user-attachments/assets/e06a3497-b225-4d90-856b-2a44ac8b7ad1)
+
 
 - Hubungan linear antara semua fitur terkait harga
 - Hubungan non-linear yang tersebar antara Volume dan fitur lainnya
@@ -91,7 +92,7 @@ Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
 
 1. _Handling Missing Values_:
 
-   - Pengecekan menunjukkan tidak ada missing values dalam dataset
+   - Tidak terdapat _Missing Value_ pada data.
 
 2. _Feature Engineering_:
 
@@ -117,7 +118,7 @@ Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
 
 - Prinsip algoritma: Memprediksi berdasarkan rata-rata k tetangga terdekat
 - Hyperparameter yang digunakan:
-  - n_neighbors=9
+  - n_neighbors=12
 - Kelebihan:
   - Non-parametrik, bekerja baik dengan data non-linear
   - Sederhana untuk dipahami dan diimplementasikan
@@ -129,9 +130,10 @@ Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
 
 - Prinsip algoritma: Ensembel pohon keputusan menggunakan metode bagging
 - Hyperparameter yang digunakan:
-  - n_estimators=50
-  - max_depth=16
-  - random_state=45
+  - n_estimators=45
+  - max_depth=32
+  - random_state=321
+  - n_jobs=-1
 - Kelebihan:
   - Menangani hubungan non-linear dengan baik
   - Memberikan informasi pentingnya fitur
@@ -153,11 +155,11 @@ Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
 ## Evaluation
 
 ### Perbandingan Model dengan matriks MSE
-| Model           | Train Error | Test Error |
-|------------------|-------------|------------|
-| KNN             | 0.095       | 0.116      |
-| Random Forest   | 0.002       | 0.024      |
-| Linear Regression | 0.095     | 0.116      |
+| Model              | Train Error | Test Error |
+|:------------------:|:-----------:|:----------:|
+| KNN                | 0.000237    | 0.000272   |
+| Random Forest      | 0.000031    | 0.000213   |
+| Linear Regression  | 0.000191    | 0.000192   |
 
 
 ### Analisis Hasil
@@ -165,13 +167,13 @@ Visualisasi pairplot mengkonfirmasi hubungan ini dan menunjukkan:
 1. Evaluasi Keberhasilan Proyek:
 
    - Proyek berhasil membangun tiga model prediktif
-   - Random Forest menunjukkan kinerja terbaik dengan MSE terendah pada data train dan test
+   - Random Forest menunjukkan kinerja terbaik dengan MSE terendah rata-rata dari data train dan test
    - Semua model menunjukkan kemampuan prediksi yang wajar untuk harga saham BMW
 
 2. Pencapaian Tujuan:
 
    - Tujuan utama prediksi harga tercapai
-   - Model Random Forest menunjukkan performa sangat baik dengan MSE test 0,024
+   - Model Random Forest menunjukkan performa sangat baik dengan MSE test
    - Model mempertahankan kinerja baik pada data yang belum pernah dilihat
 
 3. Penyelesaian Masalah:

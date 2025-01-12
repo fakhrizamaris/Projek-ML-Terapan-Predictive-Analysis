@@ -36,6 +36,23 @@ bmw_data.describe()
 # Mengecek apakah ada nilai yang null dalam data
 bmw_data.isnull().sum()
 
+# Mengecek jumlah data yang duplikat
+bmw_data.duplicated().sum()
+
+"""## Mengecek Outlier"""
+
+sns.boxplot(x=bmw_data['Adj_Close'])
+
+sns.boxplot(x=bmw_data['Close'])
+
+sns.boxplot(x=bmw_data['High'])
+
+sns.boxplot(x=bmw_data['Low'])
+
+sns.boxplot(x=bmw_data['Open'])
+
+sns.boxplot(x=bmw_data['Volume'])
+
 """## Analisis Tren Harga Saham"""
 
 # Mengubah kolom Date menjadi datetime agar dapat melihat tren dari data
@@ -80,19 +97,19 @@ Setelah saya melihat informasi dari dataset tersebut, diketahui tidak ada nilai 
 Dapat dilihat diatas bahwa kolom close, open, low, dan high berkorelasi sangat kuat, sedangkan volume memiliki performa korelasi yang negative terhadapat harga lainnya. Selanjutnya saya ingin memilih kolom "Close" sebagai target prediksi.
 """
 
-# Menghapus kolom Volume
-bmw_data.drop(['Volume'], inplace=True, axis=1)
-bmw_data.head()
-
-"""## TRAIN TEST SPLIT"""
-
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
+# Menghapus kolom Volume
+bmw_data.drop(['Volume'], inplace=True, axis=1)
+bmw_data.head()
+
 # Features and target selection
 X = bmw_data.drop(['Close'], axis=1)  # Features
 y = bmw_data['Close']  # Target
+
+"""## TRAIN TEST SPLIT"""
 
 # Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=321)
@@ -183,7 +200,7 @@ Disini saya memilih model yang digunakan berdasarkan hasil matriks MSE yang ada 
 
 # Visualisasi prediksi vs aktual untuk model terbaik (Random Forest)
 plt.figure(figsize=(12, 6))
-y_pred_rf = LR.predict(X_test)
+y_pred_rf = RF.predict(X_test)
 plt.scatter(y_test, y_pred_rf, alpha=0.5)
 plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
 plt.xlabel('Harga Aktual')

@@ -41,6 +41,8 @@ Pada riset jurnal yang berjudul _"Stock Market Prediction with Historical Time S
 2. Duplikasi Data: Tidak terdapat duplikat data setelah dilakukan pemeriksaan menggunakan metode _.duplicated()_.
 3. _Outlier_: Pada fitur harga _(Close, Open, High, Low_), tidak ditemukan outlier ekstrem berdasarkan analisis visual menggunakan boxplot.
 Namun, pada fitur Volume, terdapat beberapa nilai yang jauh lebih besar dibandingkan nilai rata-rata. Hal ini diantisipasi sebagai variasi normal karena volume perdagangan dapat berfluktuasi signifikan berdasarkan aktivitas pasar.
+![outlier_volume](https://github.com/user-attachments/assets/d8d08ed6-f637-45b9-b587-50ee148f4aaf)
+
 
 ### Tautan Sumber Data
 Dataset yang digunakan berasal dari Kaggle dan dapat diakses melalui tautan berikut:
